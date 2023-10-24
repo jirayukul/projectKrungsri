@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-12">
+    <mat-card style="margin-top: 10px">
+      <div style="text-align: center">
+        <h1>Pokemon</h1>
+        <form [formGroup]="formGroup">
+
+
+          <mat-form-field class="w-20">
+            <mat-label>Search</mat-label>
+            <input
+              type="text"
+              aria-label="Search"
+              matInput
+              formControlName="pokemonData"
+            />
+          </mat-form-field>
+        </form>
+      </div>
+      <mat-card-content class="mat-card-scroll">
+        <ng-container *ngIf="displayData">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let pk of displayData">
+              <mat-card (click)="openDialog(pk)"
+                style="margin-top: 10px; margin-left: 10px; margin-right: 10px; border-radius: 50px;cursor: pointer;"
+              >
+                <div class="row">
+                  <div class="col-md-12" style="text-align: center">
+                    <img
+                      style="height: 200px; margin-top: 10px; margin-left: 10px; margin-right: 10px"
+                      [src]="'https://img.pokemondb.net/artwork/large/' + pk.name + '.jpg'"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12" style="text-align: center">
+                    <h3>
+                      {{ pk.name }}
+                    </h3>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </ng-container>
+      </mat-card-content>
+      <mat-card-footer
+        ><mat-paginator *ngIf="!formGroup.get('pokemonData')?.value"
+          [length]="datalength"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="paginatorEvent($event);pageEvent = $event"
+          aria-label="Select page"
+        >
+        </mat-paginator
+      ></mat-card-footer>
+    </mat-card>
+  </div>
+</div>

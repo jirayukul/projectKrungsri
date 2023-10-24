@@ -1,0 +1,4 @@
+.mat-card-scroll {
+  max-height: 620px;
+  overflow-y: auto;
+}
